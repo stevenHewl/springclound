@@ -1,0 +1,20 @@
+server:
+  port: 8989
+
+spring:
+  application:
+    name: ConfigClient  #配置要和 git 仓库的文件夹名称一致，因为配置中心配置了 search-paths 是通过应用名查找对应的路径
+  cloud:
+    config:
+      #基于 Eureka 来使用，就可以省略这一步，把配置中心和其他服务都注册到 eureka server，这个时候，服务会自动获取 eureka 里的 config，去获取自己配置需要的配置文件。
+      #uri: http://localhost:8888/    #配置要连接的配置中心的地址
+      profile: dev  #配置获取哪个环境的配置文件
+      label: master #配置连接远程仓库的分支，这里我们是 master
+      discovery:
+          enabled: true
+          service-id: spring-cloud-config  #通过 spring.cloud.config.discovery 的配置，通过 service-id 向注册中心查找配置中心，这个 service-id 和配置中心的 application.name 一致
+        
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
