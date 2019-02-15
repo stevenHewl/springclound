@@ -1,0 +1,28 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8084
+spring:
+  application:
+    name: spring-feign-service
+
+# Ribbon 的负载均衡策略
+spring-test-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule    
+    
+feign:
+  hystrix:
+    enabled: true    #打开 Feign 的熔断功能
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+      health:
+        show-details: ALWAYS
+    
