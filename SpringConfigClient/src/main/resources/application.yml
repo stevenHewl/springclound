@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: ConfigClient  #配置要和 git 仓库的文件夹名称一致，因为配置中心配置了 search-paths 是通过应用名查找对应的路径
+    name: ConfigClient #配置要和 git 仓库的文件夹名称一致，因为配置中心配置了 search-paths 是通过应用名查找对应的路径
   cloud:
     config:
       #基于 Eureka 来使用，就可以省略这一步，把配置中心和其他服务都注册到 eureka server，这个时候，服务会自动获取 eureka 里的 config，去获取自己配置需要的配置文件。
