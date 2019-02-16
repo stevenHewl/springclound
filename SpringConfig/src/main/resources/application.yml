@@ -22,6 +22,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+#要配置下面的节点，curl -X POST http://localhost:8887/actuator/bus-refresh ，这个请求才能是配置更新
 management:
   endpoints:
     web:
