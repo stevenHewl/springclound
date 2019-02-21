@@ -1,0 +1,33 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: spring-cloud-gateway
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+      
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+#自定义路由规则 以 /tset/ 开头的请求都转发给 spring-test-service 服务
+zuul:
+  routes:
+    #test:
+    #  path: /test/**
+    #  serviceId: spring-test-service
+      #简洁写法
+    spring-test-service: /test/**
+  ignored-patterns:  #隐藏此接口，外界访问不了，但不影响自定义路由规则
+    - /spring-test-service/port
+  #  - /test/port
+      
+      
+      
+# http://localhost:9001/actuator/routes 可以查看zuul从eureka获取到的服务组件

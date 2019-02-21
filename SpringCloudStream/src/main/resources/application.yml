@@ -1,0 +1,37 @@
+server:
+  port: 9899
+spring:
+  application:
+    name: spring-cloud-stream
+  rabbitmq:
+    host: 192.168.1.141
+    port: 5672
+    username: steven
+    password: 123456
+  cloud:
+    stream:
+      bindings:
+        myInput:
+              #指定输入通道对应的主题名, destination目标，目的地
+          destination: streamExchange
+              #在现实的业务场景中，每一个微服务应用为了实现高可用和负载均衡，都会集群部署，按照上面我们启动了两个应用的实例，消息被重复消费了两次。
+              #为解决这个问题，Spring Cloud Stream 中提供了消费组，通过配置 spring.cloud.stream.bindings.myInput.group 属性为应用指定
+              # 一个组名，指定该应用实例属于 stream 消费组  
+          group: stream
+          consumer:
+                 #通过消费组的设置，虽然能保证同一消息只被一个消费者进行接收和处理，但是对于特殊业务情况，除了要保证单一实例消费之外，
+                 #还希望那些具备相同特征的消息都能被同一个实例消费，这个就可以使用 Spring Cloud Stream 提供的消息分区功能了
+                 #通过该参数开启消费者分区功能
+            partitioned: true
+        myOutput:
+              #指定输出通道对应的主题名
+          destination: streamExchange
+          producer:
+                 #通过该参数指定了分区键的表达式规则，可以根据实际的输出消息规则配置 SpEL 来生成合适的分区键
+            partitionKeyExpression: payload
+            partitionCount: 2
+         #该参数指定了当前消费者的总实例数量
+      instance-count: 2
+         #该参数设置了当前实例的索引号，从 0 开始，最大值为 spring.cloud.stream.instance-count 参数 - 1
+      instance-index: 1
+

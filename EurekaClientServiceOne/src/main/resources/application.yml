@@ -1,0 +1,25 @@
+server:
+  port: 8481
+spring:
+  application:
+    name: service1
+  zipkin:
+    base-url: http://192.168.184.131:9410/  #zipkin 的服务器端
+  #这里把抽样百分比设置为1，即信息全部采集
+  sleuth:
+    sampler:
+      probability: 1.0
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: steven
+    password: 123456
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    root: debug
+    
