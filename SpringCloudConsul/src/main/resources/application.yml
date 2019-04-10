@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: spring-consul-producer
+  cloud:
+    consul:
+      host: 192.168.1.141
+      port: 8500
+      discovery:
+        tags: version=1.0,author=steven
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 5s
+        #spring cloud官网文档的推荐，为了保证生成一个唯一的id ，也可以换成${spring.application.name}:${spring.cloud.client.ipAddress}
+        #或${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        
+server:
+    port: 9091  #消费者服务端口
