@@ -7,7 +7,12 @@ eureka:
 spring:
   application:
     name: spring-ribbon-service
-    
+ # zipkin:
+ #   base-url: http://192.168.184.131:9411/  #zipkin 的服务器端
+ # sleuth:
+ #   sampler:
+ #     probability: 1.0   #采样比例，介于0到1之间，1表示全部采集
+        
 spring-test-service:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule   #随机策略， 轮询策略：RoundRobinRule

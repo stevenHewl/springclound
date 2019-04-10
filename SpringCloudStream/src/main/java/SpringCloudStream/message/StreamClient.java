@@ -26,3 +26,6 @@ public interface StreamClient {
 	@Output(StreamClient.SEND)
 	MessageChannel GetSendMessageChannel();
 }
+
+
+

@@ -15,6 +15,8 @@ spring-ribbon-service 端口为8083,向服务注册中心注册
 当spring-ribbon-service通过restTemplate调用spring-test-service的port接口时，
 因为用ribbon进行了负载均衡，会轮流的调用spring-test-service:8081,8082 两个端口的port接口；
 spring-ribbon-service 只提供一个客服端负载均衡作用，轮流调用其它服务的多个实例，本身并不提供功能服务。
+
+通过spring-cloud-zipkin 进行链路追踪查看
  * */
 @Service
 public class SpringRibbonService {

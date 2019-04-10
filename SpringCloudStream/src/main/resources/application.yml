@@ -10,7 +10,8 @@ spring:
     password: 123456
   cloud:
     stream:
-      bindings:
+      default-binder: rabbitmq #默认的binder是rabbitmq
+      bindings:        
         myInput:
               #指定输入通道对应的主题名, destination目标，目的地
           destination: streamExchange
